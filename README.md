@@ -2,7 +2,7 @@
 
 # Tuna Birgün
 
-**Computational biology · transcriptomics · genomics · pipeline engineering**
+**computational biology · transcriptomics · genomics · pipeline engineering**
 
 MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul Yeni Yüzyıl University
 

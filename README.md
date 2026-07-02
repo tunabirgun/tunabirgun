@@ -18,21 +18,76 @@ MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul
 
 ### About
 
-I work on transcriptomics and functional genomics: bulk RNA-seq and microarray
-analysis, differential expression with DESeq2 and limma, functional enrichment
-(GO / KEGG / g:Profiler), and protein–protein interaction networks from STRING.
-Much of my work targets non-model organisms — crops, fungi, and yeast — that
+I work on transcriptomics, functional genomics, and single-cell analysis. My
+day-to-day covers bulk RNA-seq and microarray analysis, differential expression
+(DESeq2, limma), functional enrichment (GO, KEGG, g:Profiler), and
+protein–protein interaction networks (STRING), together with single-cell and
+single-nucleus RNA-seq (sc/snRNA-seq) run on HPC systems, including work on
+Huntington's disease model organisms. A recurring theme is non-model organisms
+(crops, fungi, and yeast), such as Fusarium graminearum in wheat and barley, that
 lack ready-made Bioconductor annotation, so I spend most of my time building
 reproducible, portable pipelines in R and Python.
 
 ### Toolbox
 
-| | |
-|---|---|
-| **Languages** | ![R](https://img.shields.io/badge/R-555?style=flat-square&logo=r&logoColor=white) ![Python](https://img.shields.io/badge/Python-555?style=flat-square&logo=python&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-555?style=flat-square&logo=javascript&logoColor=white) ![Bash](https://img.shields.io/badge/Bash-555?style=flat-square&logo=gnubash&logoColor=white) |
-| **Bioinformatics** | ![Bioconductor](https://img.shields.io/badge/Bioconductor-555?style=flat-square) ![DESeq2](https://img.shields.io/badge/DESeq2-555?style=flat-square) ![limma](https://img.shields.io/badge/limma-555?style=flat-square) ![STAR](https://img.shields.io/badge/STAR-555?style=flat-square) ![HISAT2](https://img.shields.io/badge/HISAT2-555?style=flat-square) ![Salmon](https://img.shields.io/badge/Salmon-555?style=flat-square) |
-| **Resources** | ![STRING](https://img.shields.io/badge/STRING-555?style=flat-square) ![KEGG](https://img.shields.io/badge/KEGG-555?style=flat-square) ![g:Profiler](https://img.shields.io/badge/g:Profiler-555?style=flat-square) ![eggNOG](https://img.shields.io/badge/eggNOG-555?style=flat-square) |
-| **Reproducibility** | ![renv](https://img.shields.io/badge/renv-555?style=flat-square) ![conda](https://img.shields.io/badge/conda-555?style=flat-square&logo=anaconda&logoColor=white) ![Git](https://img.shields.io/badge/Git-555?style=flat-square&logo=git&logoColor=white) |
+<table>
+  <tr>
+    <td><b>Languages</b></td>
+    <td>
+      <a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/R-555?style=flat-square&logo=r&logoColor=white" alt="R"></a>
+      <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-555?style=flat-square&logo=python&logoColor=white" alt="Python"></a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-555?style=flat-square&logo=javascript&logoColor=white" alt="JavaScript"></a>
+      <a href="https://www.gnu.org/software/bash/"><img src="https://img.shields.io/badge/Bash-555?style=flat-square&logo=gnubash&logoColor=white" alt="Bash"></a>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Bulk RNA-seq</b></td>
+    <td>
+      <a href="https://bioconductor.org/"><img src="https://img.shields.io/badge/Bioconductor-555?style=flat-square" alt="Bioconductor"></a>
+      <a href="https://bioconductor.org/packages/DESeq2/"><img src="https://img.shields.io/badge/DESeq2-555?style=flat-square" alt="DESeq2"></a>
+      <a href="https://bioconductor.org/packages/limma/"><img src="https://img.shields.io/badge/limma-555?style=flat-square" alt="limma"></a>
+      <a href="https://github.com/alexdobin/STAR"><img src="https://img.shields.io/badge/STAR-555?style=flat-square" alt="STAR"></a>
+      <a href="https://daehwankimlab.github.io/hisat2/"><img src="https://img.shields.io/badge/HISAT2-555?style=flat-square" alt="HISAT2"></a>
+      <a href="https://combine-lab.github.io/salmon/"><img src="https://img.shields.io/badge/Salmon-555?style=flat-square" alt="Salmon"></a>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Single-cell</b></td>
+    <td>
+      <a href="https://satijalab.org/seurat/"><img src="https://img.shields.io/badge/Seurat-555?style=flat-square" alt="Seurat"></a>
+      <a href="https://scanpy.readthedocs.io/"><img src="https://img.shields.io/badge/Scanpy-555?style=flat-square" alt="Scanpy"></a>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Genomics</b></td>
+    <td>
+      <a href="http://www.htslib.org/"><img src="https://img.shields.io/badge/SAMtools-555?style=flat-square" alt="SAMtools"></a>
+      <a href="https://samtools.github.io/bcftools/"><img src="https://img.shields.io/badge/BCFtools-555?style=flat-square" alt="BCFtools"></a>
+      <a href="https://bedtools.readthedocs.io/"><img src="https://img.shields.io/badge/BEDTools-555?style=flat-square" alt="BEDTools"></a>
+      <a href="https://github.com/broadinstitute/gatk"><img src="https://img.shields.io/badge/GATK-555?style=flat-square" alt="GATK"></a>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Resources</b></td>
+    <td>
+      <a href="https://string-db.org/"><img src="https://img.shields.io/badge/STRING-555?style=flat-square" alt="STRING"></a>
+      <a href="https://www.kegg.jp/"><img src="https://img.shields.io/badge/KEGG-555?style=flat-square" alt="KEGG"></a>
+      <a href="https://biit.cs.ut.ee/gprofiler/"><img src="https://img.shields.io/badge/g:Profiler-555?style=flat-square" alt="g:Profiler"></a>
+      <a href="http://eggnog5.embl.de/"><img src="https://img.shields.io/badge/eggNOG-555?style=flat-square" alt="eggNOG"></a>
+      <a href="https://geneontology.org/"><img src="https://img.shields.io/badge/GO-555?style=flat-square" alt="Gene Ontology"></a>
+      <a href="https://www.ensembl.org/"><img src="https://img.shields.io/badge/Ensembl-555?style=flat-square" alt="Ensembl"></a>
+      <a href="https://reactome.org/"><img src="https://img.shields.io/badge/Reactome-555?style=flat-square" alt="Reactome"></a>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Reproducibility</b></td>
+    <td>
+      <a href="https://rstudio.github.io/renv/"><img src="https://img.shields.io/badge/renv-555?style=flat-square" alt="renv"></a>
+      <a href="https://docs.conda.io/"><img src="https://img.shields.io/badge/conda-555?style=flat-square&logo=anaconda&logoColor=white" alt="conda"></a>
+      <a href="https://git-scm.com/"><img src="https://img.shields.io/badge/Git-555?style=flat-square&logo=git&logoColor=white" alt="Git"></a>
+    </td>
+  </tr>
+</table>
 
 ### Selected work
 

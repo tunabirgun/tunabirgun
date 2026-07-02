@@ -42,21 +42,6 @@ STAR / HISAT2 / Salmon alignment, DESeq2 / limma, GO / KEGG / g:Profiler
 enrichment, and STRING interaction networks, with first-class support for crops
 and fungi that lack a Bioconductor OrgDb.
 
-### Stats
-
-<div align="center">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=tunabirgun&show_icons=true&hide_border=true&bg_color=00000000&title_color=c9d1d9&text_color=c9d1d9&icon_color=c9d1d9&count_private=true" />
-  <img src="https://github-readme-stats.vercel.app/api?username=tunabirgun&show_icons=true&hide_border=true&bg_color=00000000&title_color=24292f&text_color=24292f&icon_color=24292f&count_private=true" height="150" />
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=tunabirgun&layout=compact&hide_border=true&bg_color=00000000&title_color=c9d1d9&text_color=c9d1d9&langs_count=6" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=tunabirgun&layout=compact&hide_border=true&bg_color=00000000&title_color=24292f&text_color=24292f&langs_count=6" height="150" />
-</picture>
-
-</div>
-
 ---
 
 <div align="center">

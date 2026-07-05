@@ -97,6 +97,13 @@ STAR / HISAT2 / Salmon alignment, DESeq2 / limma, GO / KEGG / g:Profiler
 enrichment, and STRING interaction networks, with first-class support for crops
 and fungi that lack a Bioconductor OrgDb.
 
+**[Arf](https://github.com/tunabirgun/arf)** — a local-first second brain for
+scientists and coders: plain-Markdown notes with `[[wikilinks]]`, LaTeX and
+syntax-highlighted code, a knowledge graph, and on-device embeddings (MiniLM,
+in the browser) that surface related but unlinked notes. Runs as a web app, an
+installable PWA, and native desktop builds for Windows, macOS, and Linux.
+[Open Arf](https://tunabirgun.github.io/arf-app/).
+
 ---
 
 <div align="center">

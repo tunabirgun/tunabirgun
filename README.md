@@ -91,7 +91,7 @@ reproducible, portable pipelines in R and Python.
 
 ### Selected work
 
-**[bulkseq-studio](https://github.com/tunabirgun/bulkseq-studio)** — a cross-platform,
+**[BulkSeq Studio](https://github.com/tunabirgun/bulkseq-studio)** — a cross-platform,
 no-code desktop app for reproducible bulk RNA-seq and microarray analysis:
 STAR / HISAT2 / Salmon alignment, DESeq2 / limma, GO / KEGG / g:Profiler
 enrichment, and STRING interaction networks, with first-class support for crops

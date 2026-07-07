@@ -51,6 +51,17 @@ I work on transcriptomics, functional genomics, and single-cell analysis. My day
     </td>
   </tr>
   <tr>
+    <td><b>Multi-omics ML</b></td>
+    <td>
+      <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-555?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"></a>
+      <a href="https://scikit-learn.org/"><img src="https://img.shields.io/badge/scikit--learn-555?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn"></a>
+      <a href="https://pandas.pydata.org/"><img src="https://img.shields.io/badge/pandas-555?style=flat-square&logo=pandas&logoColor=white" alt="pandas"></a>
+      <a href="https://numpy.org/"><img src="https://img.shields.io/badge/NumPy-555?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"></a>
+      <a href="https://scipy.org/"><img src="https://img.shields.io/badge/SciPy-555?style=flat-square&logo=scipy&logoColor=white" alt="SciPy"></a>
+      <a href="https://plotly.com/python/"><img src="https://img.shields.io/badge/Plotly-555?style=flat-square&logo=plotly&logoColor=white" alt="Plotly"></a>
+    </td>
+  </tr>
+  <tr>
     <td><b>Genomics</b></td>
     <td>
       <a href="http://www.htslib.org/"><img src="https://img.shields.io/badge/SAMtools-555?style=flat-square" alt="SAMtools"></a>

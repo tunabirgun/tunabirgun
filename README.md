@@ -83,6 +83,8 @@ I work on transcriptomics, functional genomics, and single-cell analysis. My day
 
 ### Selected work
 
+**[omicau](https://github.com/tunabirgun/omicau)** *(in development)* — a reproducible, leakage-safe multi-omics data-audit CLI: format-agnostic ingestion and alignment, SHA-256 data provenance, missingness-bias and batch-effect diagnostics, group-aware cross-validated classical and PyTorch masked-pooling fusion benchmarks with leakage-safe feature attribution, and a dual clinical/research dashboard. Built for the [Build with Claude: Life Sciences](https://cerebralvalley.ai/e/built-with-claude-life-sciences) hackathon (Anthropic × Gladstone Institutes, Jul 7–13 2026).
+
 **[BulkSeq Studio](https://github.com/tunabirgun/bulkseq-studio)** — a cross-platform, no-code desktop app for reproducible bulk RNA-seq and microarray analysis: STAR / HISAT2 / Salmon alignment, DESeq2 / limma, GO / KEGG / g:Profiler enrichment, and STRING interaction networks, with first-class support for crops and fungi that lack a Bioconductor OrgDb.
 
 **[Arf](https://github.com/tunabirgun/arf)** — a local-first second brain for scientists and coders: plain-Markdown notes with `[[wikilinks]]`, LaTeX and syntax-highlighted code, a knowledge graph, and on-device embeddings (MiniLM) that surface related but unlinked notes. Native desktop app for Windows, macOS, and Linux. [Download](https://github.com/tunabirgun/arf/releases/latest).

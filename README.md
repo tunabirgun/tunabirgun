@@ -98,11 +98,13 @@ I'm also deeply interested in epistemology and in the methodology and history of
 
 ### Selected work
 
-**[omicau](https://github.com/tunabirgun/omicau)** *(in development)* — a reproducible, leakage-safe multi-omics data-audit CLI: format-agnostic ingestion and alignment, SHA-256 data provenance, missingness-bias and batch-effect diagnostics, group-aware cross-validated classical and PyTorch masked-pooling fusion benchmarks with leakage-safe feature attribution, and a dual clinical/research dashboard. Built for the [Build with Claude: Life Sciences](https://cerebralvalley.ai/e/built-with-claude-life-sciences) hackathon (Anthropic × Gladstone Institutes, Jul 7–13 2026).
+**[Arf](https://github.com/tunabirgun/arf)** — a local-first second brain for scientists and coders: plain-Markdown notes with `[[wikilinks]]`, LaTeX and syntax-highlighted code, a knowledge graph, and on-device embeddings (MiniLM) that surface related but unlinked notes. Native desktop app for Windows, macOS, and Linux. [Download](https://github.com/tunabirgun/arf/releases/latest).
 
 **[BulkSeq Studio](https://github.com/tunabirgun/bulkseq-studio)** — a cross-platform, no-code desktop app for reproducible bulk RNA-seq and microarray analysis: STAR / HISAT2 / Salmon alignment, DESeq2 / limma, GO / KEGG / g:Profiler enrichment, and STRING interaction networks, with first-class support for crops and fungi that lack a Bioconductor OrgDb.
 
-**[Arf](https://github.com/tunabirgun/arf)** — a local-first second brain for scientists and coders: plain-Markdown notes with `[[wikilinks]]`, LaTeX and syntax-highlighted code, a knowledge graph, and on-device embeddings (MiniLM) that surface related but unlinked notes. Native desktop app for Windows, macOS, and Linux. [Download](https://github.com/tunabirgun/arf/releases/latest).
+**[omicau](https://github.com/tunabirgun/omicau)** *(in development)* — a reproducible, leakage-safe multi-omics data-audit CLI: format-agnostic ingestion and alignment, SHA-256 data provenance, missingness-bias and batch-effect diagnostics, group-aware cross-validated classical and PyTorch masked-pooling fusion benchmarks with leakage-safe feature attribution, and a dual clinical/research dashboard. Built for the [Build with Claude: Life Sciences](https://cerebralvalley.ai/e/built-with-claude-life-sciences) hackathon (Anthropic × Gladstone Institutes, Jul 7–13 2026).
+
+**geneRelate / pomRelate** — a pair of static, client-side tools for cross-species gene analysis that run entirely in the browser with no backend: ortholog mapping, STRING protein–protein interaction networks, GO / KEGG enrichment, and per-gene phylogenetic trees. [geneRelate](https://github.com/tunabirgun/geneRelate) ([demo](https://tunabirgun.github.io/geneRelate/)) covers 20 *Fusarium* species; [pomRelate](https://github.com/tunabirgun/pomRelate) ([demo](https://tunabirgun.github.io/pomRelate/)) centers on *Schizosaccharomyces pombe* across model organisms. Built on STRING v12.0, KEGG, and eggNOG v7.
 
 ---
 

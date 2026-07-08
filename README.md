@@ -20,6 +20,10 @@ MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul
 
 I work on transcriptomics, functional genomics, and single-cell analysis. My day-to-day covers bulk RNA-seq and microarray analysis, differential expression (DESeq2, limma), functional enrichment (GO, KEGG, g:Profiler), and protein–protein interaction networks (STRING), together with single-cell and single-nucleus RNA-seq (sc/snRNA-seq) run on HPC systems, including work on Huntington's disease model organisms. A recurring theme is non-model organisms (crops, fungi, and yeast), such as Fusarium graminearum in wheat and barley, that lack ready-made Bioconductor annotation, so I spend most of my time building reproducible, portable pipelines in R and Python.
 
+Lately I turn those methods into finished tools: a no-code desktop app for reproducible RNA-seq and microarray analysis (BulkSeq Studio), a leakage-safe multi-omics data-audit and fusion-benchmarking CLI with a clinical dashboard and deep-learning fusion (omicau), and a local-first knowledge tool for scientists and coders (Arf). I care about how software looks and feels as much as how it runs — design, typography, and visual craft are a standing artistic curiosity for me, most visible in Arf's interface.
+
+I'm also deeply interested in epistemology and in the methodology and history of science — how knowledge is justified and how methods come to be trusted. It's the same instinct that pulls me toward reproducibility and honest evidence in the tools I build.
+
 ### Toolbox
 
 <table>

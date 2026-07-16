@@ -4,7 +4,7 @@
 
 **computational biology · transcriptomics · genomics · pipeline engineering · agentic coding**
 
-MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul Yeni Yüzyıl University
+MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul Yeni Yuzyil University
 
 [![Website](https://img.shields.io/badge/tunabirgun.com-24292f?style=flat-square&logo=googlechrome&logoColor=white)](https://tunabirgun.com)
 [![Email](https://img.shields.io/badge/Email-24292f?style=flat-square&logo=gmail&logoColor=white)](mailto:tunabirgun@gmail.com)

@@ -20,7 +20,7 @@ MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul
 
 I work on transcriptomics, functional genomics, and single-cell analysis. My day-to-day covers bulk RNA-seq and microarray analysis, differential expression (DESeq2, limma), functional enrichment (GO, KEGG, g:Profiler), and protein–protein interaction networks (STRING), together with single-cell and single-nucleus RNA-seq (sc/snRNA-seq) run on HPC systems, including work on Huntington's disease model organisms. A recurring theme is non-model organisms (crops, fungi, and yeast), such as Fusarium graminearum in wheat and barley, that lack ready-made Bioconductor annotation, so I spend most of my time building reproducible, portable pipelines in R and Python.
 
-Lately I turn those methods into finished tools: a no-code desktop app for reproducible RNA-seq and microarray analysis (BulkSeq Studio), a leakage-safe multi-omics data-audit and fusion-benchmarking CLI with a clinical dashboard and deep-learning fusion (omicau), and a local-first knowledge tool for scientists and coders (Arf). I care about how software looks and feels as much as how it runs — design, typography, and visual craft are a standing artistic curiosity for me, most visible in Arf's interface.
+Lately I turn those methods into finished tools — local-first, reproducible, and provenance-sealed: a no-code desktop app for reproducible RNA-seq and microarray analysis (BulkSeq Studio), a desktop tool for transposable-element annotation and TE-aware PCR primer design (TEagle), a leakage-safe multi-omics data-audit and fusion-benchmarking CLI with a clinical dashboard and deep-learning fusion (omicau), and a local-first knowledge tool for scientists and coders (Arf). I care about how software looks and feels as much as how it runs — design, typography, and visual craft are a standing artistic curiosity for me, most visible in Arf's interface.
 
 I'm also deeply interested in epistemology and in the methodology and history of science — how knowledge is justified and how methods come to be trusted. It's the same instinct that pulls me toward reproducibility and honest evidence in the tools I build.
 
@@ -94,6 +94,17 @@ I'm also deeply interested in epistemology and in the methodology and history of
       <a href="https://git-scm.com/"><img src="https://img.shields.io/badge/Git-555?style=flat-square&logo=git&logoColor=white" alt="Git"></a>
     </td>
   </tr>
+  <tr>
+    <td><b>Desktop / annotation</b></td>
+    <td>
+      <a href="https://doc.qt.io/qtforpython/"><img src="https://img.shields.io/badge/PySide6%20%C2%B7%20Qt-555?style=flat-square&logo=qt&logoColor=white" alt="PySide6 / Qt"></a>
+      <a href="https://primer3.org/"><img src="https://img.shields.io/badge/Primer3-555?style=flat-square" alt="Primer3"></a>
+      <a href="http://hmmer.org/"><img src="https://img.shields.io/badge/HMMER-555?style=flat-square" alt="HMMER"></a>
+      <a href="https://www.repeatmasker.org/"><img src="https://img.shields.io/badge/RepeatMasker-555?style=flat-square" alt="RepeatMasker"></a>
+      <a href="https://www.dfam.org/"><img src="https://img.shields.io/badge/Dfam-555?style=flat-square" alt="Dfam"></a>
+      <a href="https://github.com/lh3/minimap2"><img src="https://img.shields.io/badge/minimap2-555?style=flat-square" alt="minimap2"></a>
+    </td>
+  </tr>
 </table>
 
 ### Selected work
@@ -103,6 +114,8 @@ I'm also deeply interested in epistemology and in the methodology and history of
 **[Litehouse](https://github.com/tunabirgun/litehouse)** ([live](https://tunabirgun.github.io/litehouse/)) — a browser-only scholarly literature-review tool: it retrieves works from open APIs (OpenAlex, Crossref, Europe PMC, DataCite), then writes an evidence-locked, cited synthesis with a local WebGPU model (Qwen3), attaches SHA-256 integrity receipts, and exports a classic Computer Modern LaTeX report. No server and no install — retrieval, the model, and rendering all run in the browser.
 
 **[BulkSeq Studio](https://github.com/tunabirgun/bulkseq-studio)** — a cross-platform, no-code desktop app for reproducible bulk RNA-seq and microarray analysis: STAR / HISAT2 / Salmon alignment, DESeq2 / limma, GO / KEGG / g:Profiler enrichment, and STRING interaction networks, with first-class support for crops and fungi that lack a Bioconductor OrgDb.
+
+**[TEagle](https://github.com/tunabirgun/TEagle)** — a native desktop app for transposable-element annotation and TE-aware PCR primer design: evidence-traceable structural and protein-domain (HMMER) classification, an interactive genome viewer, Primer3 design checked by pair-aware in-silico PCR, and a local whole-genome off-target scan (RepeatMasker / Dfam and minimap2 run through a managed WSL backend) — with every result sealed by content-addressed provenance (database and tool versions plus checksums) so it reproduces exactly. Windows, no command line. [Download](https://github.com/tunabirgun/TEagle/releases/latest).
 
 **[omicau](https://github.com/tunabirgun/omicau)** — a reproducible, leakage-safe multi-omics data-audit CLI: format-agnostic ingestion and alignment, SHA-256 data provenance, missingness-bias and batch-effect diagnostics, group-aware cross-validated classical and PyTorch masked-pooling fusion benchmarks with leakage-safe feature attribution, and a dual clinical/research dashboard. Built for the [Build with Claude: Life Sciences](https://cerebralvalley.ai/e/built-with-claude-life-sciences) hackathon (Anthropic × Gladstone Institutes, Jul 7–13 2026).
 

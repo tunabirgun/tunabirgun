@@ -26,60 +26,11 @@ I am also interested in epistemology and the methodology and history of science:
 
 ## Toolbox
 
-Tools used across my research pipelines and scientific applications.
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Languages</b><br><br>
-      <code>R</code> <code>Python</code> <code>TypeScript</code> <code>JavaScript</code> <code>Rust</code> <code>Bash</code>
-    </td>
-    <td width="50%" valign="top">
-      <b>Scientific computing &amp; ML</b><br><br>
-      <code>Bioconductor</code> <code>NumPy</code> <code>pandas</code> <code>SciPy</code> <code>scikit-learn</code> <code>PyTorch</code>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Transcriptomics</b><br><br>
-      <code>DESeq2</code> <code>limma</code> <code>edgeR</code> <code>Seurat</code> <code>Scanpy</code> <code>scvi-tools</code> <code>SingleCellExperiment</code>
-    </td>
-    <td width="50%" valign="top">
-      <b>Sequencing &amp; genomics</b><br><br>
-      <code>STAR / STARsolo</code> <code>HISAT2</code> <code>Salmon / alevin</code> <code>FastQC</code> <code>MultiQC</code> <code>fastp</code> <code>SAMtools</code> <code>featureCounts</code>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Annotation &amp; sequence analysis</b><br><br>
-      <code>HMMER</code> <code>RepeatMasker</code> <code>Dfam</code> <code>Primer3</code> <code>minimap2</code> <code>BCFtools</code> <code>BEDTools</code> <code>GATK</code>
-    </td>
-    <td width="50%" valign="top">
-      <b>Networks &amp; functional biology</b><br><br>
-      <code>STRING</code> <code>GO</code> <code>KEGG</code> <code>g:Profiler</code> <code>clusterProfiler</code> <code>Reactome</code> <code>igraph</code> <code>ggraph</code>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Desktop &amp; web applications</b><br><br>
-      <code>PySide6 / Qt</code> <code>Tauri</code> <code>Svelte</code> <code>React</code> <code>Vite</code> <code>WebGPU / WebLLM</code> <code>Transformers.js</code> <code>CodeMirror</code>
-    </td>
-    <td width="50%" valign="top">
-      <b>Visualization</b><br><br>
-      <code>ggplot2</code> <code>Plotly</code> <code>Shiny</code> <code>patchwork</code> <code>pheatmap</code> <code>svglite</code>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b>Research databases &amp; APIs</b><br><br>
-      <code>Ensembl</code> <code>eggNOG</code> <code>OpenAlex</code> <code>Crossref</code> <code>Europe PMC</code> <code>DataCite</code>
-    </td>
-    <td width="50%" valign="top">
-      <b>Reproducibility &amp; QA</b><br><br>
-      <code>Snakemake</code> <code>conda / mamba</code> <code>renv</code> <code>Docker</code> <code>WSL2</code> <code>GitHub Actions</code> <code>pytest</code> <code>Vitest</code> <code>Playwright</code>
-    </td>
-  </tr>
-</table>
+- **Languages & application development:** R · Python · TypeScript · JavaScript · Rust · Bash · PySide6 / Qt · Tauri · Svelte · React · WebGPU
+- **Transcriptomics & machine learning:** Bioconductor · DESeq2 · limma · edgeR · Seurat · Scanpy · scvi-tools · PyTorch · scikit-learn
+- **Sequencing & genomics:** STAR / STARsolo · HISAT2 · Salmon / alevin · fastp · FastQC / MultiQC · SAMtools · featureCounts · HMMER · RepeatMasker · Dfam · Primer3 · minimap2
+- **Networks, annotation & visualization:** STRING · GO · KEGG · g:Profiler · clusterProfiler · Reactome · Ensembl · eggNOG · igraph · ggraph · ggplot2 · Plotly
+- **Reproducibility & quality assurance:** Snakemake · conda / mamba · renv · Docker · WSL2 · GitHub Actions · pytest · Vitest · Playwright
 
 ## Selected work
 

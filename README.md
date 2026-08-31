@@ -2,7 +2,7 @@
 
 # Tuna Birgün
 
-**computational biology · transcriptomics · genomics · pipeline engineering · agentic coding**
+**computational biology · transcriptomics · genomics · reproducible scientific software**
 
 MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul Yeni Yuzyil University
 
@@ -16,15 +16,15 @@ MSc Biotechnology, Istanbul Technical University · Research Assistant, Istanbul
 
 ---
 
-### About
+## About
 
-I work on transcriptomics, functional genomics, and single-cell analysis. My day-to-day covers bulk RNA-seq and microarray analysis, differential expression (DESeq2, limma), functional enrichment (GO, KEGG, g:Profiler), and protein–protein interaction networks (STRING), together with single-cell and single-nucleus RNA-seq (sc/snRNA-seq) run on HPC systems, including work on Huntington's disease model organisms. A recurring theme is non-model organisms (crops, filamentous fungi, and yeasts), such as *Fusarium graminearum* in wheat and barley, that lack ready-made Bioconductor annotation, so I spend most of my time building reproducible, portable pipelines in R and Python.
+I work across transcriptomics, functional genomics, and single-cell analysis. My research includes bulk RNA-seq, microarrays, differential expression, functional enrichment, protein–protein interaction networks, and HPC-based single-cell and single-nucleus RNA-seq. I often work with crops, filamentous fungi, and yeasts that lack ready-made Bioconductor annotation, including *Fusarium graminearum* in wheat and barley.
 
-Lately I turn those methods into finished tools — local-first, reproducible, and provenance-sealed: a no-code desktop app for reproducible RNA-seq and microarray analysis (BulkSeq Studio), a desktop tool for transposable-element annotation and TE-aware PCR primer design (TEagle), a leakage-safe multi-omics data-audit and fusion-benchmarking CLI with a clinical dashboard and deep-learning fusion (omicau), and a local-first knowledge tool for scientists and coders (Arf). I care about how software looks and feels as much as how it runs — design, typography, and visual craft are a standing artistic curiosity for me, most visible in Arf's interface.
+I turn these methods into reproducible, local-first scientific software in R and Python. My projects span no-code expression analysis, transposable-element annotation and primer design, leakage-safe multi-omics benchmarking, and knowledge tools for researchers. I care about interface design, typography, and visual craft as much as technical correctness.
 
-I'm also deeply interested in epistemology and in the methodology and history of science — how knowledge is justified and how methods come to be trusted. It's the same instinct that pulls me toward reproducibility and honest evidence in the tools I build.
+I am also interested in epistemology and the methodology and history of science: how knowledge is justified, how methods earn trust, and how software can preserve the evidence behind a result.
 
-### Toolbox
+## Toolbox
 
 <table>
   <tr>
@@ -107,7 +107,7 @@ I'm also deeply interested in epistemology and in the methodology and history of
   </tr>
 </table>
 
-### Selected work
+## Selected work
 
 **[Arf](https://github.com/tunabirgun/arf)** — a local-first second brain for scientists and coders: plain-Markdown notes with `[[wikilinks]]`, LaTeX and syntax-highlighted code, a knowledge graph, and on-device embeddings (MiniLM) that surface related but unlinked notes. Native desktop app for Windows, macOS, and Linux. [Download](https://github.com/tunabirgun/arf/releases/latest).
 
@@ -118,8 +118,6 @@ I'm also deeply interested in epistemology and in the methodology and history of
 **[TEagle](https://github.com/tunabirgun/TEagle)** — a native desktop app for transposable-element annotation and TE-aware PCR primer design: evidence-traceable structural and protein-domain (HMMER) classification, an interactive genome viewer, Primer3 design checked by pair-aware in-silico PCR, and a local whole-genome off-target scan (RepeatMasker / Dfam and minimap2 run through a managed WSL backend) — with every result sealed by content-addressed provenance (database and tool versions plus checksums) so it reproduces exactly. Windows, no command line. [Download](https://github.com/tunabirgun/TEagle/releases/latest).
 
 **[omicau](https://github.com/tunabirgun/omicau)** — a reproducible, leakage-safe multi-omics data-audit CLI: format-agnostic ingestion and alignment, SHA-256 data provenance, missingness-bias and batch-effect diagnostics, group-aware cross-validated classical and PyTorch masked-pooling fusion benchmarks with leakage-safe feature attribution, and a dual clinical/research dashboard. Built for the [Build with Claude: Life Sciences](https://cerebralvalley.ai/e/built-with-claude-life-sciences) hackathon (Anthropic × Gladstone Institutes, Jul 7–13 2026).
-
-**geneRelate / pomRelate** — a pair of static, client-side tools for cross-species gene analysis that run entirely in the browser with no backend: ortholog mapping, STRING protein–protein interaction networks, GO / KEGG enrichment, and per-gene phylogenetic trees. [geneRelate](https://github.com/tunabirgun/geneRelate) ([demo](https://tunabirgun.github.io/geneRelate/)) covers 20 *Fusarium* species; [pomRelate](https://github.com/tunabirgun/pomRelate) ([demo](https://tunabirgun.github.io/pomRelate/)) centers on *Schizosaccharomyces pombe* across model organisms. Built on STRING v12.0, KEGG, and eggNOG v7.
 
 ---
 

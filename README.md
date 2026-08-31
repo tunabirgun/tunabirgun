@@ -26,83 +26,57 @@ I am also interested in epistemology and the methodology and history of science:
 
 ## Toolbox
 
+Tools used across my research pipelines and scientific applications.
+
 <table>
   <tr>
-    <td><b>Languages</b></td>
-    <td>
-      <a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/R-555?style=flat-square&logo=r&logoColor=white" alt="R"></a>
-      <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-555?style=flat-square&logo=python&logoColor=white" alt="Python"></a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-555?style=flat-square&logo=javascript&logoColor=white" alt="JavaScript"></a>
-      <a href="https://www.gnu.org/software/bash/"><img src="https://img.shields.io/badge/Bash-555?style=flat-square&logo=gnubash&logoColor=white" alt="Bash"></a>
+    <td width="50%" valign="top">
+      <b>Languages</b><br><br>
+      <code>R</code> <code>Python</code> <code>TypeScript</code> <code>JavaScript</code> <code>Rust</code> <code>Bash</code>
+    </td>
+    <td width="50%" valign="top">
+      <b>Scientific computing &amp; ML</b><br><br>
+      <code>Bioconductor</code> <code>NumPy</code> <code>pandas</code> <code>SciPy</code> <code>scikit-learn</code> <code>PyTorch</code>
     </td>
   </tr>
   <tr>
-    <td><b>Bulk RNA-seq</b></td>
-    <td>
-      <a href="https://bioconductor.org/"><img src="https://img.shields.io/badge/Bioconductor-555?style=flat-square" alt="Bioconductor"></a>
-      <a href="https://bioconductor.org/packages/DESeq2/"><img src="https://img.shields.io/badge/DESeq2-555?style=flat-square" alt="DESeq2"></a>
-      <a href="https://bioconductor.org/packages/limma/"><img src="https://img.shields.io/badge/limma-555?style=flat-square" alt="limma"></a>
-      <a href="https://github.com/alexdobin/STAR"><img src="https://img.shields.io/badge/STAR-555?style=flat-square" alt="STAR"></a>
-      <a href="https://daehwankimlab.github.io/hisat2/"><img src="https://img.shields.io/badge/HISAT2-555?style=flat-square" alt="HISAT2"></a>
-      <a href="https://combine-lab.github.io/salmon/"><img src="https://img.shields.io/badge/Salmon-555?style=flat-square" alt="Salmon"></a>
+    <td width="50%" valign="top">
+      <b>Transcriptomics</b><br><br>
+      <code>DESeq2</code> <code>limma</code> <code>edgeR</code> <code>Seurat</code> <code>Scanpy</code> <code>scvi-tools</code> <code>SingleCellExperiment</code>
+    </td>
+    <td width="50%" valign="top">
+      <b>Sequencing &amp; genomics</b><br><br>
+      <code>STAR / STARsolo</code> <code>HISAT2</code> <code>Salmon / alevin</code> <code>FastQC</code> <code>MultiQC</code> <code>fastp</code> <code>SAMtools</code> <code>featureCounts</code>
     </td>
   </tr>
   <tr>
-    <td><b>Single-cell</b></td>
-    <td>
-      <a href="https://satijalab.org/seurat/"><img src="https://img.shields.io/badge/Seurat-555?style=flat-square" alt="Seurat"></a>
-      <a href="https://scanpy.readthedocs.io/"><img src="https://img.shields.io/badge/Scanpy-555?style=flat-square" alt="Scanpy"></a>
+    <td width="50%" valign="top">
+      <b>Annotation &amp; sequence analysis</b><br><br>
+      <code>HMMER</code> <code>RepeatMasker</code> <code>Dfam</code> <code>Primer3</code> <code>minimap2</code> <code>BCFtools</code> <code>BEDTools</code> <code>GATK</code>
+    </td>
+    <td width="50%" valign="top">
+      <b>Networks &amp; functional biology</b><br><br>
+      <code>STRING</code> <code>GO</code> <code>KEGG</code> <code>g:Profiler</code> <code>clusterProfiler</code> <code>Reactome</code> <code>igraph</code> <code>ggraph</code>
     </td>
   </tr>
   <tr>
-    <td><b>Multi-omics ML</b></td>
-    <td>
-      <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-555?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"></a>
-      <a href="https://scikit-learn.org/"><img src="https://img.shields.io/badge/scikit--learn-555?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn"></a>
-      <a href="https://pandas.pydata.org/"><img src="https://img.shields.io/badge/pandas-555?style=flat-square&logo=pandas&logoColor=white" alt="pandas"></a>
-      <a href="https://numpy.org/"><img src="https://img.shields.io/badge/NumPy-555?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"></a>
-      <a href="https://scipy.org/"><img src="https://img.shields.io/badge/SciPy-555?style=flat-square&logo=scipy&logoColor=white" alt="SciPy"></a>
-      <a href="https://plotly.com/python/"><img src="https://img.shields.io/badge/Plotly-555?style=flat-square&logo=plotly&logoColor=white" alt="Plotly"></a>
+    <td width="50%" valign="top">
+      <b>Desktop &amp; web applications</b><br><br>
+      <code>PySide6 / Qt</code> <code>Tauri</code> <code>Svelte</code> <code>React</code> <code>Vite</code> <code>WebGPU / WebLLM</code> <code>Transformers.js</code> <code>CodeMirror</code>
+    </td>
+    <td width="50%" valign="top">
+      <b>Visualization</b><br><br>
+      <code>ggplot2</code> <code>Plotly</code> <code>Shiny</code> <code>patchwork</code> <code>pheatmap</code> <code>svglite</code>
     </td>
   </tr>
   <tr>
-    <td><b>Genomics</b></td>
-    <td>
-      <a href="http://www.htslib.org/"><img src="https://img.shields.io/badge/SAMtools-555?style=flat-square" alt="SAMtools"></a>
-      <a href="https://samtools.github.io/bcftools/"><img src="https://img.shields.io/badge/BCFtools-555?style=flat-square" alt="BCFtools"></a>
-      <a href="https://bedtools.readthedocs.io/"><img src="https://img.shields.io/badge/BEDTools-555?style=flat-square" alt="BEDTools"></a>
-      <a href="https://github.com/broadinstitute/gatk"><img src="https://img.shields.io/badge/GATK-555?style=flat-square" alt="GATK"></a>
+    <td width="50%" valign="top">
+      <b>Research databases &amp; APIs</b><br><br>
+      <code>Ensembl</code> <code>eggNOG</code> <code>OpenAlex</code> <code>Crossref</code> <code>Europe PMC</code> <code>DataCite</code>
     </td>
-  </tr>
-  <tr>
-    <td><b>Resources</b></td>
-    <td>
-      <a href="https://string-db.org/"><img src="https://img.shields.io/badge/STRING-555?style=flat-square" alt="STRING"></a>
-      <a href="https://www.kegg.jp/"><img src="https://img.shields.io/badge/KEGG-555?style=flat-square" alt="KEGG"></a>
-      <a href="https://biit.cs.ut.ee/gprofiler/"><img src="https://img.shields.io/badge/g:Profiler-555?style=flat-square" alt="g:Profiler"></a>
-      <a href="http://eggnog5.embl.de/"><img src="https://img.shields.io/badge/eggNOG-555?style=flat-square" alt="eggNOG"></a>
-      <a href="https://geneontology.org/"><img src="https://img.shields.io/badge/GO-555?style=flat-square" alt="Gene Ontology"></a>
-      <a href="https://www.ensembl.org/"><img src="https://img.shields.io/badge/Ensembl-555?style=flat-square" alt="Ensembl"></a>
-      <a href="https://reactome.org/"><img src="https://img.shields.io/badge/Reactome-555?style=flat-square" alt="Reactome"></a>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Reproducibility</b></td>
-    <td>
-      <a href="https://rstudio.github.io/renv/"><img src="https://img.shields.io/badge/renv-555?style=flat-square" alt="renv"></a>
-      <a href="https://docs.conda.io/"><img src="https://img.shields.io/badge/conda-555?style=flat-square&logo=anaconda&logoColor=white" alt="conda"></a>
-      <a href="https://git-scm.com/"><img src="https://img.shields.io/badge/Git-555?style=flat-square&logo=git&logoColor=white" alt="Git"></a>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Desktop / annotation</b></td>
-    <td>
-      <a href="https://doc.qt.io/qtforpython/"><img src="https://img.shields.io/badge/PySide6%20%C2%B7%20Qt-555?style=flat-square&logo=qt&logoColor=white" alt="PySide6 / Qt"></a>
-      <a href="https://primer3.org/"><img src="https://img.shields.io/badge/Primer3-555?style=flat-square" alt="Primer3"></a>
-      <a href="http://hmmer.org/"><img src="https://img.shields.io/badge/HMMER-555?style=flat-square" alt="HMMER"></a>
-      <a href="https://www.repeatmasker.org/"><img src="https://img.shields.io/badge/RepeatMasker-555?style=flat-square" alt="RepeatMasker"></a>
-      <a href="https://www.dfam.org/"><img src="https://img.shields.io/badge/Dfam-555?style=flat-square" alt="Dfam"></a>
-      <a href="https://github.com/lh3/minimap2"><img src="https://img.shields.io/badge/minimap2-555?style=flat-square" alt="minimap2"></a>
+    <td width="50%" valign="top">
+      <b>Reproducibility &amp; QA</b><br><br>
+      <code>Snakemake</code> <code>conda / mamba</code> <code>renv</code> <code>Docker</code> <code>WSL2</code> <code>GitHub Actions</code> <code>pytest</code> <code>Vitest</code> <code>Playwright</code>
     </td>
   </tr>
 </table>

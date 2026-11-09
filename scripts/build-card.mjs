@@ -315,40 +315,10 @@ ${infoSvg}
 `;
 }
 
-const ICONS = {
-  globe: '<circle cx="8" cy="8" r="7"/><ellipse cx="8" cy="8" rx="3" ry="7"/><path d="M1 8h14"/>',
-  orcid: '<circle cx="8" cy="8" r="7"/><path d="M5.5 6.5v5M5.5 4.3v.1M8 6.5v5h1.5a2.5 2.5 0 0 0 0-5z"/>',
-  linkedin: '<rect x="1" y="1" width="14" height="14" rx="2.5"/><path d="M4.5 7v4.5M4.5 4.6v.1M7.5 11.5V7M7.5 9a2 2 0 0 1 4 0v2.5"/>',
-  mail: '<rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="m1.5 3.8 6.5 5 6.5-5"/>',
-};
-const BUTTONS = [
-  ['website', 'WEBSITE', 'globe'],
-  ['orcid', 'ORCID', 'orcid'],
-  ['linkedin', 'LINKEDIN', 'linkedin'],
-  ['email', 'EMAIL', 'mail'],
-];
-
-function button(label, icon, theme) {
-  const t = THEMES[theme];
-  const w = 200;
-  const h = 44;
-  const textW = len(label) * 8.4;
-  const groupW = 16 + 12 + textW;
-  const x0 = (w - groupW) / 2;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}">
-<rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="6" fill="${t.bg}" stroke="${t.strong}"/>
-<path d="M6 ${h - 1.5}h${w - 12}" stroke="${t.muted}" stroke-width="2"/>
-<g transform="translate(${x0.toFixed(1)} ${(h - 16) / 2 - 1})" fill="none" stroke="${t.bright}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${ICONS[icon]}</g>
-<text x="${(x0 + 28).toFixed(1)}" y="${h / 2 + 4}" textLength="${textW.toFixed(1)}" lengthAdjust="spacing" style="font-family:${MONO};font-size:14px;fill:${t.bright};letter-spacing:1px">${label}</text>
-</svg>
-`;
-}
-
 const stats = await collect();
 mkdirSync(OUT, { recursive: true });
 stats.title = `${stats.name} — profile card`;
 for (const theme of Object.keys(THEMES)) {
   writeFileSync(join(OUT, `card-${theme}.svg`), card(stats, theme));
-  for (const [id, label, icon] of BUTTONS) writeFileSync(join(OUT, `btn-${id}-${theme}.svg`), button(label, icon, theme));
 }
 console.log(JSON.stringify({ ...stats, title: undefined }, null, 1));

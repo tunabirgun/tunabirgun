@@ -26,19 +26,11 @@ jobs:
         with:
           node-version: 24
 
-      - name: Build profile card and buttons
+      - name: Build profile card
         run: node scripts/build-card.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OUT_DIR: dist
-
-      - name: Build contribution snake
-        uses: Platane/snk@v3.5.0
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/snake-light.svg?color_snake=#0a0a0a&color_dots=#e3e3e3,#bdbdbd,#8a8a8a,#595959,#2a2a2a
-            dist/snake-dark.svg?color_snake=#fafafa&color_dots=#262626,#404040,#6b6b6b,#a3a3a3,#e5e5e5
 
       - name: Publish to the output branch
         uses: crazy-max/ghaction-github-pages@v5.0.0

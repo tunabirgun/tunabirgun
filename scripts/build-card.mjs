@@ -82,7 +82,7 @@ const CODE_MAX = 6; // languages shown, by byte count
 const FONT = { size: 13, cw: 7.8, lh: 19 };
 const PAD = { x: 24, top: 18, bottom: 22 };
 const BAR = 38;
-const TYPE = { start: 0.4, perChar: 0.045, pause: 0.3, stagger: 0.035, gap: 0.35 }; // one-time session replay
+const TYPE = { start: 0.6, perChar: 0.06, pause: 0.35, stagger: 0.05, gap: 0.4, hold: 10 }; // seconds; the session loops
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function gh(path, accept) {
@@ -245,42 +245,79 @@ function session(s) {
 }
 
 const spans = (segs) => segs.map(([s, c]) => `<tspan class="${c}">${esc(s)}</tspan>`).join('');
-const text = (segs, col, y, cls, style) =>
-  `<text class="${cls}" style="${style}" x="${(PAD.x + col * FONT.cw).toFixed(1)}" y="${y.toFixed(1)}" textLength="${(width(segs) * FONT.cw).toFixed(1)}" lengthAdjust="spacing">${spans(segs)}</text>`;
-const at = (t) => `animation-delay:${t.toFixed(2)}s`;
+const text = (segs, col, y, attrs) =>
+  `<text ${attrs} x="${(PAD.x + col * FONT.cw).toFixed(1)}" y="${y.toFixed(1)}" textLength="${(width(segs) * FONT.cw).toFixed(1)}" lengthAdjust="spacing">${spans(segs)}</text>`;
+const pct = (t, T) => `${((t / T) * 100).toFixed(3)}%`;
+const HIDDEN = 'clip-path:inset(0 100% 0 0)';
+const SHOWN = 'clip-path:inset(0 0 0 0)';
 
+// The session replays forever: lines appear, the screen holds, `clear` is typed, and it starts over.
 function card(stats) {
   const rows = session(stats);
   const w = Math.ceil(PAD.x * 2 + COLS * FONT.cw);
   const h = Math.ceil(BAR + PAD.top + rows.length * FONT.lh + PAD.bottom);
   const y = (i) => BAR + PAD.top + (i + 0.78) * FONT.lh;
   const promptW = width(PROMPT);
-  const body = [];
+  const items = []; // { svg(attrs) -> string, a, typing?: { n, dur }, startHidden? }
+  const cursor = [{ t: 0, row: 0, col: 0 }];
   let t = TYPE.start;
-  let cursor = '';
+
+  const typeCommand = (i, cmdText, hidden = false) => {
+    const t0 = t + 0.15;
+    const n = len(cmdText);
+    const dur = n * TYPE.perChar;
+    items.push({ make: (a) => text([[cmdText, 'w']], promptW, y(i), a), a: t0, typing: { n, dur }, startHidden: hidden });
+    cursor.push({ t: t0, row: i, col: promptW, typing: n }, { t: t0 + dur, row: i, col: promptW + n });
+    t = t0 + dur + TYPE.pause;
+  };
+  const showPrompt = (i) => {
+    items.push({ make: (a) => text(PROMPT, 0, y(i), a), a: t });
+    cursor.push({ t, row: i, col: promptW });
+  };
 
   rows.forEach((row, i) => {
     if (row.kind === 'cmd') {
-      if (rows[i - 1]?.kind !== 'cmd' && i) t += TYPE.gap;
-      body.push(text(PROMPT, 0, y(i), 'ap', at(t)));
-      const typing = len(row.text) * TYPE.perChar;
-      body.push(text([[row.text, 'w']], promptW, y(i), 'ty', `${at(t + 0.15)};animation-duration:${typing.toFixed(2)}s;animation-timing-function:steps(${len(row.text)},start)`));
-      t += 0.15 + typing + TYPE.pause;
+      if (i) t += TYPE.gap;
+      showPrompt(i);
+      typeCommand(i, row.text);
+      cursor.push({ t, row: i + 1, col: 0 });
     } else if (row.kind === 'out') {
-      body.push(text(row.segs, 0, y(i), 'ap', at(t)));
+      items.push({ make: (a) => text(row.segs, 0, y(i), a), a: t });
       t += TYPE.stagger;
+      cursor.push({ t, row: i + 1, col: 0 });
     } else if (row.kind === 'swatch') {
       const sw = [C.inset, C.bar, C.ansiBlack, C.border, C.gray, C.muted, C.fg, C.white];
       const top = y(i) - FONT.size * 0.82;
-      const cells = sw.map((fill, k) => `<rect x="${(PAD.x + (row.x + k * 3) * FONT.cw).toFixed(1)}" y="${top.toFixed(1)}" width="${(3 * FONT.cw).toFixed(1)}" height="${FONT.size}" fill="${fill}"/>`);
-      body.push(`<g class="ap" style="${at(t)}">${cells.join('')}</g>`);
+      const cells = sw.map((fill, k) => `<rect x="${(PAD.x + (row.x + k * 3) * FONT.cw).toFixed(1)}" y="${top.toFixed(1)}" width="${(3 * FONT.cw).toFixed(1)}" height="${FONT.size}" fill="${fill}"/>`).join('');
+      items.push({ make: (a) => `<g ${a}>${cells}</g>`, a: t });
       t += TYPE.stagger;
+      cursor.push({ t, row: i + 1, col: 0 });
     } else if (row.kind === 'end') {
       t += TYPE.gap;
-      body.push(text(PROMPT, 0, y(i), 'ap', at(t)));
-      cursor = `<rect class="cur" style="${at(t)}" x="${(PAD.x + promptW * FONT.cw).toFixed(1)}" y="${(y(i) - FONT.size * 0.82).toFixed(1)}" width="${FONT.cw.toFixed(1)}" height="${FONT.size}" fill="${C.fg}"/>`;
+      showPrompt(i);
+      t += TYPE.hold;
+      typeCommand(i, 'clear', true);
     }
   });
+  const T = t;
+  const finalRow = rows.length - 1;
+
+  const css = [];
+  const body = items.map((it, k) => {
+    const name = `k${k}`;
+    if (it.typing) {
+      css.push(`@keyframes ${name}{0%{opacity:1;${HIDDEN}}${pct(it.a, T)}{opacity:1;${HIDDEN};animation-timing-function:steps(${it.typing.n},start)}${pct(it.a + it.typing.dur, T)}{opacity:1;${SHOWN}}100%{opacity:1;${SHOWN}}}`);
+    } else {
+      css.push(`@keyframes ${name}{0%{opacity:0}${pct(it.a, T)}{opacity:0;animation-timing-function:steps(1,start)}100%{opacity:1}}`);
+    }
+    return it.make(`class="an${it.startHidden ? ' rm' : ''}" style="animation-name:${name}"`);
+  });
+
+  const stops = new Map();
+  for (const c of cursor) stops.set(c.t.toFixed(3), c);
+  const curFrames = [...stops.values()].sort((a, b) => a.t - b.t).map((c) =>
+    `${pct(c.t, T)}{transform:translate(${(c.col * FONT.cw).toFixed(1)}px,${(c.row * FONT.lh).toFixed(1)}px);animation-timing-function:${c.typing ? `steps(${c.typing},start)` : 'steps(1,end)'}}`);
+  css.push(`@keyframes cur{${curFrames.join('')}100%{transform:translate(0px,0px)}}`);
 
   const title = `@${USER} — ~`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="title" xml:space="preserve">
@@ -288,10 +325,10 @@ function card(stats) {
 <style>
 text{font-family:${MONO};font-size:${FONT.size}px;white-space:pre;font-variant-ligatures:none}
 .w{fill:${C.white};font-weight:700}.f{fill:${C.fg}}.m{fill:${C.muted}}.g{fill:${C.gray}}
-.ap{animation:ap .01s linear both}@keyframes ap{from{opacity:0}to{opacity:1}}
-.ty{animation-name:ty;animation-fill-mode:both}@keyframes ty{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-.cur{animation:blink 1.1s steps(1,end) infinite both}@keyframes blink{0%{opacity:1}50%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.ap,.ty,.cur{animation:none}}
+.an{animation-duration:${T.toFixed(2)}s;animation-timing-function:linear;animation-iteration-count:infinite}
+.cur{animation:cur ${T.toFixed(2)}s linear infinite}.blink{animation:blink 1.1s steps(1,end) infinite}@keyframes blink{50%{opacity:0}}
+${css.join('\n')}
+@media (prefers-reduced-motion:reduce){.an,.cur,.blink{animation:none}.rm{opacity:0}}
 </style>
 <rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="10" fill="${C.bg}" stroke="${C.border}"/>
 <path d="M0.5 ${BAR}V10.5a10 10 0 0 1 10-10h${w - 21}a10 10 0 0 1 10 10V${BAR}z" fill="${C.bar}"/>
@@ -299,7 +336,7 @@ text{font-family:${MONO};font-size:${FONT.size}px;white-space:pre;font-variant-l
 ${[0, 1, 2].map((k) => `<circle cx="${20 + k * 20}" cy="${BAR / 2}" r="6" fill="${C.border}"/>`).join('')}
 <text x="${w / 2}" y="${BAR / 2 + 4}" text-anchor="middle" style="font-size:12px"><tspan class="f">@${USER}</tspan><tspan class="m">${esc(title.slice(len(USER) + 1))}</tspan></text>
 ${body.join('\n')}
-${cursor}
+<g class="blink"><rect class="cur" transform="translate(${(promptW * FONT.cw).toFixed(1)} ${(finalRow * FONT.lh).toFixed(1)})" x="${PAD.x}" y="${(y(0) - FONT.size * 0.82).toFixed(1)}" width="${FONT.cw.toFixed(1)}" height="${FONT.size}" fill="${C.fg}"/></g>
 </svg>
 `;
 }

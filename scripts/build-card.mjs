@@ -12,9 +12,10 @@ const HEADERS = {
   ...(TOKEN && { Authorization: `Bearer ${TOKEN}` }),
 };
 
-const THEMES = {
-  dark: { bg: '#0a0a0a', fg: '#e5e5e5', bright: '#fafafa', muted: '#a3a3a3', faint: '#8a8a8a', line: '#262626', strong: '#404040' },
-  light: { bg: '#faf9f7', fg: '#2a2a2a', bright: '#0a0a0a', muted: '#595959', faint: '#6b6b6b', line: '#e3e3e3', strong: '#cfcfcf' },
+// GitHub dark (Primer) colours; white is the only accent.
+const C = {
+  bg: '#0d1117', bar: '#151b23', border: '#3d444d', inset: '#010409', ansiBlack: '#2f3742',
+  gray: '#656c76', muted: '#9198a1', fg: '#f0f6fc', white: '#ffffff',
 };
 const MONO = `ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono','DejaVu Sans Mono',monospace`;
 
@@ -31,61 +32,57 @@ function uptime(from) {
   return `${unit(y, 'year')}, ${unit(m, 'month')}, ${unit(d, 'day')}`;
 }
 
-const PROFILE = [
+const NEOFETCH = [
   ['OS', 'Ubuntu, macOS, Windows, iOS'],
   ['Uptime', uptime(BIRTH)],
   ['Host', 'Istanbul, Türkiye'],
-  ['Kernel', 'Research Assistant, Mol. Bio. & Genetics'],
+  ['Kernel', 'Research Assistant, Molecular Biology & Genetics'],
   ['IDE', 'OpenCode, Conductor, VS Code'],
-  ['Edu', 'MSc Biotech., ITU · BSc Bioeng., Marmara'],
-  ['Labs', 'MayaLab (ITU), BaysanLab (ITU), GunayLab (IYYU)'],
-  null,
-  ['Focus.Omics', 'bulk & single-cell transcriptomics'],
-  ['Focus.Genomics', 'variants, TEs, interactomes'],
-  ['Focus.Organisms', 'yeasts, filamentous fungi, crops'],
-  ['Focus.Software', 'reproducible, local-first tools'],
-  ['Writing', 'epistemology, method of science'],
+  ['Edu', 'MSc Biotechnology (ITU) · BSc Bioengineering (Marmara)'],
+  ['Labs', 'MayaLab (ITU) · BaysanLab (ITU) · GunayLab (IYYU)'],
+];
+const SPOKEN = ['Turkish', 'English'];
+const FOCUS = [
+  ['omics', 'bulk & single-cell transcriptomics, genomic variants, TEs, interactomes'],
+  ['organisms', 'yeasts, filamentous fungi, crops'],
+  ['software', 'reproducible, local-first scientific tools'],
+  ['writing', 'epistemology, method of science'],
 ];
 const CONTACT = [
-  ['Web', 'tunabirgun.com'],
-  ['Email', 'tunabirgun@gmail.com'],
-  ['ORCID', '0009-0009-1827-7933'],
-  ['LinkedIn', 'tunabirgun'],
+  ['web', 'tunabirgun.com'],
+  ['mail', 'tunabirgun@gmail.com'],
+  ['orcid', '0009-0009-1827-7933'],
+  ['in', 'tunabirgun'],
 ];
-const SPOKEN = 'Turkish, English';
 
 // Display label -> dependency names that indicate it. The label order breaks ties in repo counts.
 const TOOLS = {
-  'Tools.Bio': {
+  bio: {
     Snakemake: ['snakemake'], DESeq2: ['deseq2'], 'limma/edgeR': ['limma', 'edger'], Seurat: ['seurat'],
     clusterProfiler: ['clusterprofiler'], STAR: ['star'], samtools: ['samtools'], STRINGdb: ['stringdb'],
     primer3: ['primer3-py'], pyHMMER: ['pyhmmer'],
   },
-  'Tools.Data': {
+  data: {
     pandas: ['pandas'], NumPy: ['numpy'], ggplot2: ['ggplot2'], igraph: ['igraph'], 'scikit-learn': ['scikit-learn'],
     PyTorch: ['torch', 'pytorch'], tidyverse: ['dplyr', 'tidyr', 'readr'], Plotly: ['plotly'],
   },
-  'Tools.Apps': {
+  apps: {
     Tauri: ['tauri', '@tauri-apps/api'], 'Qt/PySide6': ['pyside6'], Svelte: ['svelte'], React: ['react'],
     Vite: ['vite'], FastAPI: ['fastapi'], WebLLM: ['@mlc-ai/web-llm'], 'Transformers.js': ['@huggingface/transformers'],
   },
-  'Tools.Infra': {
+  infra: {
     'GitHub Actions': ['github-actions'], conda: ['conda'], renv: ['renv'], Docker: ['docker'],
     pytest: ['pytest'], Vitest: ['vitest'], Playwright: ['@playwright/test'],
   },
 };
 const NOT_CODE = new Set(['HTML', 'CSS', 'SCSS', 'Inno Setup', 'Dockerfile', 'Jupyter Notebook', 'TeX', 'Makefile', 'CMake', 'Batchfile']);
 
-const INFO_COLS = 60;
-const PORTRAIT = { size: 10, cw: 6, lh: 11.2 };
-const INFO = { size: 13, cw: 7.8, lh: 16 };
-const PAD = 28;
-const GAP = 32;
-const FRAMES = 50;
-const TICKS_PER_FRAME = 2; // the site advances one tick per 120 ms; 100 ticks per cycle
-const CYCLE_S = 12;
-const TYPE = { start: 0.3, stagger: 0.08, dur: 0.5 }; // one-time boot: each info line types in
-
+const COLS = 96;
+const CODE_MAX = 6; // languages shown, by byte count
+const FONT = { size: 13, cw: 7.8, lh: 19 };
+const PAD = { x: 24, top: 18, bottom: 22 };
+const BAR = 38;
+const TYPE = { start: 0.4, perChar: 0.045, pause: 0.3, stagger: 0.035, gap: 0.35 }; // one-time session replay
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function gh(path, accept) {
@@ -199,126 +196,115 @@ async function collect() {
   };
 }
 
-// Frame logic copied from the <ascii-portrait> element on tunabirgun.com.
-const SUB = { '@': '%#', '%': '#*', '#': '*+', '*': '+', '+': '*' };
-function portraitFrame(lines, tick) {
-  const o = (tick * Math.PI) / 50;
-  return lines.map((c, a) =>
-    [...c].map((l, i) => {
-      const u = Math.sin(i * 0.13 + a * 0.19 - o);
-      const face = a >= 16 && a <= 30 && i >= 24 && i <= 48;
-      const edge = !c[i - 1]?.trim() || !c[i + 1]?.trim();
-      if (face || edge || !SUB[l] || u <= 0.3) return l;
-      const p = SUB[l];
-      return p[u > 0.8 ? p.length - 1 : 0];
-    }).join(''),
-  );
-}
-
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const len = (s) => [...s].length;
 const fmt = (n) => n.toLocaleString('en-US');
+const pad = (s, n) => s + ' '.repeat(Math.max(1, n - len(s)));
+const width = (segs) => segs.reduce((t, [s]) => t + len(s), 0);
 
-// A line is a list of [text, class] segments.
-const kv = (key, value, cols = INFO_COLS, lead = '. ') => {
-  const dots = Math.max(2, cols - len(lead) - len(key) - 3 - len(value));
-  return [[lead, 'p'], [key, 'k'], [': ', 'p'], ['.'.repeat(dots), 'd'], [' ', 'p'], [value, 'v']];
-};
-const header = (text) => [[text, 'h'], [' ' + '─'.repeat(INFO_COLS - len(text) - 1), 'd']];
-const blank = () => [['.', 'p']];
-const fitList = (items, key) => {
-  const room = INFO_COLS - len(key) - 9;
-  const out = [];
-  for (const item of items) if (len([...out, item].join(', ')) <= room) out.push(item);
-  return out.join(', ');
-};
+const PROMPT = [[USER, 'w'], ['@github', 'm'], [':', 'g'], ['~', 'm'], ['$ ', 'w']];
+const cmd = (text) => ({ kind: 'cmd', text });
+const out = (...segs) => ({ kind: 'out', segs });
+const BLANK = { kind: 'blank' };
 
-function infoLines(s) {
-  const lines = [header(`@${USER}`)];
-  for (const row of PROFILE) lines.push(row ? kv(...row) : blank());
-  lines.push(kv('Languages.Code', fitList(s.code, 'Languages.Code')));
-  lines.push(kv('Languages.Real', SPOKEN));
-  for (const [category, labels] of Object.entries(s.tools)) if (labels.length) lines.push(kv(category, fitList(labels, category)));
-  lines.push(blank(), header('- Contact'));
-  for (const row of CONTACT) lines.push(kv(...row));
-  lines.push(blank(), header('- Open source, open notebook'));
-  const half = (INFO_COLS - 3) / 2;
-  lines.push([...kv('Repos', fmt(s.repos), Math.floor(half)), [' | ', 'p'], ...kv('Stars', fmt(s.stars), Math.ceil(half), '')]);
-  if (s.contributions !== null) {
-    lines.push([...kv('Commits', fmt(s.commits), Math.floor(half)), [' | ', 'p'], ...kv('Followers', fmt(s.followers), Math.ceil(half), '')]);
-    lines.push(kv('Contributions (last year)', fmt(s.contributions)));
-  } else {
-    lines.push([...kv('Commits', fmt(s.commits), Math.floor(half)), [' | ', 'p'], ...kv('Followers', fmt(s.followers), Math.ceil(half), '')]);
+// Items joined by a grey separator, keeping only as many as fit in `room` columns.
+function list(items, sep, room) {
+  const kept = [];
+  for (const it of items) if (len([...kept, it].join(sep)) <= room) kept.push(it);
+  return kept.flatMap((it, i) => (i ? [[sep, 'g'], [it, 'f']] : [[it, 'f']]));
+}
+
+function session(s) {
+  const K = 11;
+  const room = COLS - K;
+  const rows = [cmd('neofetch'), out([`@${USER}`, 'w']), out(['─'.repeat(len(USER) + 1), 'g'])];
+  for (const [k, v] of NEOFETCH) rows.push(out([pad(k, K), 'm'], [v, 'f']));
+  rows.push(out([pad('Code', K), 'm'], ...list(s.code.slice(0, CODE_MAX), ' · ', room)));
+  rows.push(out([pad('Spoken', K), 'm'], ...list(SPOKEN, ' · ', room)));
+  rows.push({ kind: 'swatch', x: K });
+
+  rows.push(BLANK, cmd('cat focus.txt'));
+  for (const [k, v] of FOCUS) rows.push(out([pad(k, K), 'm'], [v, 'f']));
+
+  rows.push(BLANK, cmd('ls ~/tools'));
+  for (const [dir, labels] of Object.entries(s.tools)) {
+    if (labels.length) rows.push(out([pad(`${dir}/`, 8), 'w'], ...list(labels, '  ', COLS - 8)));
   }
-  const delta = ` ( ${fmt(s.additions)}++, ${fmt(s.deletions)}-- )`;
-  const loc = kv('Lines of Code', fmt(s.additions - s.deletions), INFO_COLS - len(delta));
-  lines.push([...loc, [delta, 'p']]);
-  return lines;
+
+  rows.push(BLANK, cmd('gh stats --public'));
+  const stat = [['repos', s.repos], ['stars', s.stars], ['followers', s.followers], ['commits', s.commits]];
+  if (s.contributions !== null) stat.push(['contributions/yr', s.contributions]);
+  rows.push(out(...stat.flatMap(([k, v], i) => [...(i ? [['  ·  ', 'g']] : []), [`${k} `, 'm'], [fmt(v), 'w']])));
+  rows.push(out(['lines of code ', 'm'], [fmt(s.additions - s.deletions), 'w'], ['  (', 'g'], [`+${fmt(s.additions)}`, 'f'], [' / ', 'g'], [`-${fmt(s.deletions)}`, 'm'], [')', 'g']));
+
+  rows.push(BLANK, cmd('cat contact.txt'));
+  rows.push(out(...CONTACT.flatMap(([k, v], i) => [...(i ? [[' · ', 'g']] : []), [`${k} `, 'm'], [v, 'f']])));
+
+  rows.push(BLANK, { kind: 'end' });
+  return rows;
 }
 
-function textLine(segments, x, y, cw, cls, style = '') {
-  const n = segments.reduce((t, [s]) => t + len(s), 0);
-  const body = segments.map(([s, c]) => `<tspan class="${c}">${esc(s)}</tspan>`).join('');
-  return `<text class="${cls}"${style && ` style="${style}"`} x="${x}" y="${y.toFixed(1)}" textLength="${(n * cw).toFixed(1)}" lengthAdjust="spacing">${body}</text>`;
-}
+const spans = (segs) => segs.map(([s, c]) => `<tspan class="${c}">${esc(s)}</tspan>`).join('');
+const text = (segs, col, y, cls, style) =>
+  `<text class="${cls}" style="${style}" x="${(PAD.x + col * FONT.cw).toFixed(1)}" y="${y.toFixed(1)}" textLength="${(width(segs) * FONT.cw).toFixed(1)}" lengthAdjust="spacing">${spans(segs)}</text>`;
+const at = (t) => `animation-delay:${t.toFixed(2)}s`;
 
-function card(stats, theme) {
-  const t = THEMES[theme];
-  const raw = readFileSync(join(ROOT, 'scripts', 'portrait.txt'), 'utf8').split('\n');
-  const frames = Array.from({ length: FRAMES }, (_, k) => portraitFrame(raw, k * TICKS_PER_FRAME));
-  const rows = raw.map((_, r) => r).filter((r) => raw[r].trim());
-  const dynamic = new Set(rows.filter((r) => frames.some((f) => f[r] !== raw[r])));
+function card(stats) {
+  const rows = session(stats);
+  const w = Math.ceil(PAD.x * 2 + COLS * FONT.cw);
+  const h = Math.ceil(BAR + PAD.top + rows.length * FONT.lh + PAD.bottom);
+  const y = (i) => BAR + PAD.top + (i + 0.78) * FONT.lh;
+  const promptW = width(PROMPT);
+  const body = [];
+  let t = TYPE.start;
+  let cursor = '';
 
-  const info = infoLines(stats);
-  const portraitW = raw[0].length * PORTRAIT.cw;
-  const portraitH = rows.length * PORTRAIT.lh;
-  const infoH = (info.length + 2) * INFO.lh;
-  const height = Math.ceil(PAD * 2 + Math.max(portraitH, infoH));
-  const infoX = PAD + portraitW + GAP;
-  const width = Math.ceil(infoX + INFO_COLS * INFO.cw + PAD);
-  const top = (height - portraitH) / 2;
-  const py = (r) => top + (rows.indexOf(r) + 0.8) * PORTRAIT.lh;
-  const prow = (line, r) => textLine([[line, 'a']], PAD, py(r), PORTRAIT.cw, 'a');
+  rows.forEach((row, i) => {
+    if (row.kind === 'cmd') {
+      if (rows[i - 1]?.kind !== 'cmd' && i) t += TYPE.gap;
+      body.push(text(PROMPT, 0, y(i), 'ap', at(t)));
+      const typing = len(row.text) * TYPE.perChar;
+      body.push(text([[row.text, 'w']], promptW, y(i), 'ty', `${at(t + 0.15)};animation-duration:${typing.toFixed(2)}s;animation-timing-function:steps(${len(row.text)},start)`));
+      t += 0.15 + typing + TYPE.pause;
+    } else if (row.kind === 'out') {
+      body.push(text(row.segs, 0, y(i), 'ap', at(t)));
+      t += TYPE.stagger;
+    } else if (row.kind === 'swatch') {
+      const sw = [C.inset, C.bar, C.ansiBlack, C.border, C.gray, C.muted, C.fg, C.white];
+      const top = y(i) - FONT.size * 0.82;
+      const cells = sw.map((fill, k) => `<rect x="${(PAD.x + (row.x + k * 3) * FONT.cw).toFixed(1)}" y="${top.toFixed(1)}" width="${(3 * FONT.cw).toFixed(1)}" height="${FONT.size}" fill="${fill}"/>`);
+      body.push(`<g class="ap" style="${at(t)}">${cells.join('')}</g>`);
+      t += TYPE.stagger;
+    } else if (row.kind === 'end') {
+      t += TYPE.gap;
+      body.push(text(PROMPT, 0, y(i), 'ap', at(t)));
+      cursor = `<rect class="cur" style="${at(t)}" x="${(PAD.x + promptW * FONT.cw).toFixed(1)}" y="${(y(i) - FONT.size * 0.82).toFixed(1)}" width="${FONT.cw.toFixed(1)}" height="${FONT.size}" fill="${C.fg}"/>`;
+    }
+  });
 
-  const still = rows.filter((r) => !dynamic.has(r)).map((r) => prow(raw[r], r)).join('');
-  const original = [...dynamic].map((r) => prow(raw[r], r)).join('');
-  const animated = frames
-    .map((f, k) => `<g class="fr" style="animation-delay:-${(((FRAMES - k) * CYCLE_S) / FRAMES).toFixed(2)}s">${[...dynamic].map((r) => prow(f[r], r)).join('')}</g>`)
-    .join('');
-
-  const infoTop = (height - infoH) / 2;
-  const iy = (i) => infoTop + (i + 0.8) * INFO.lh;
-  const typed = (i, n) => `animation-duration:${TYPE.dur}s;animation-delay:${(TYPE.start + i * TYPE.stagger).toFixed(2)}s;animation-timing-function:steps(${Math.max(1, n)},end)`;
-  const infoSvg = info.map((l, i) => textLine(l, infoX.toFixed(1), iy(i), INFO.cw, 'i ty', typed(i, l.reduce((t, [x]) => t + len(x), 0)))).join('');
-  const bootDone = TYPE.start + info.length * TYPE.stagger + TYPE.dur;
-  const promptY = iy(info.length + 1);
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title" xml:space="preserve">
-<title id="title">${esc(stats.title)}</title>
+  const title = `@${USER} — ~`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="title" xml:space="preserve">
+<title id="title">${esc(stats.name)} — terminal profile</title>
 <style>
-text{font-family:${MONO};white-space:pre;font-variant-ligatures:none}
-.a{font-size:${PORTRAIT.size}px;fill:${t.fg}}
-.i{font-size:${INFO.size}px}
-.h{fill:${t.bright};font-weight:700}.k{fill:${t.bright};font-weight:600}.v{fill:${t.fg}}.p{fill:${t.muted}}.d{fill:${t.faint}}
-.fr{opacity:0;animation:fr ${CYCLE_S}s steps(1,end) infinite}.orig{animation:hide 1s infinite}@keyframes hide{from,to{opacity:0}}
-@keyframes fr{0%{opacity:1}${(100 / FRAMES).toFixed(3)}%{opacity:0}100%{opacity:0}}
-.ty{animation-name:type;animation-fill-mode:both}@keyframes type{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-.cur{animation:blink 1.2s steps(1,end) ${bootDone.toFixed(2)}s infinite both}@keyframes blink{0%{opacity:0}50%{opacity:1}}
-@media (prefers-reduced-motion:reduce){.fr,.orig,.ty,.cur{animation:none}}
+text{font-family:${MONO};font-size:${FONT.size}px;white-space:pre;font-variant-ligatures:none}
+.w{fill:${C.white};font-weight:700}.f{fill:${C.fg}}.m{fill:${C.muted}}.g{fill:${C.gray}}
+.ap{animation:ap .01s linear both}@keyframes ap{from{opacity:0}to{opacity:1}}
+.ty{animation-name:ty;animation-fill-mode:both}@keyframes ty{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.cur{animation:blink 1.1s steps(1,end) infinite both}@keyframes blink{0%{opacity:1}50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.ap,.ty,.cur{animation:none}}
 </style>
-<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="8" fill="${t.bg}" stroke="${t.line}"/>
-<g>${still}</g><g class="orig">${original}</g>${animated}
-${infoSvg}
-<text class="i ty" style="${typed(info.length + 1, 1)}" x="${infoX.toFixed(1)}" y="${promptY.toFixed(1)}"><tspan class="h">&gt;</tspan></text>
-<rect class="cur" x="${(infoX + 2 * INFO.cw).toFixed(1)}" y="${(promptY - INFO.size * 0.85).toFixed(1)}" width="${INFO.cw.toFixed(1)}" height="${INFO.size}" fill="${t.muted}"/>
+<rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="10" fill="${C.bg}" stroke="${C.border}"/>
+<path d="M0.5 ${BAR}V10.5a10 10 0 0 1 10-10h${w - 21}a10 10 0 0 1 10 10V${BAR}z" fill="${C.bar}"/>
+<path d="M0.5 ${BAR}.5h${w - 1}" stroke="${C.border}"/>
+${[0, 1, 2].map((k) => `<circle cx="${20 + k * 20}" cy="${BAR / 2}" r="6" fill="${C.border}"/>`).join('')}
+<text x="${w / 2}" y="${BAR / 2 + 4}" text-anchor="middle" style="font-size:12px"><tspan class="f">@${USER}</tspan><tspan class="m">${esc(title.slice(len(USER) + 1))}</tspan></text>
+${body.join('\n')}
+${cursor}
 </svg>
 `;
 }
 
 const stats = await collect();
 mkdirSync(OUT, { recursive: true });
-stats.title = `${stats.name} — profile card`;
-for (const theme of Object.keys(THEMES)) {
-  writeFileSync(join(OUT, `card-${theme}.svg`), card(stats, theme));
-}
-console.log(JSON.stringify({ ...stats, title: undefined }, null, 1));
+writeFileSync(join(OUT, 'card.svg'), card(stats));
+console.log(JSON.stringify(stats, null, 1));

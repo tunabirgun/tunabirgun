@@ -328,7 +328,6 @@ text{font-family:${MONO};font-size:${FONT.size}px;white-space:pre;font-variant-l
 .an{animation-duration:${T.toFixed(2)}s;animation-timing-function:linear;animation-iteration-count:infinite}
 .cur{animation:cur ${T.toFixed(2)}s linear infinite}.blink{animation:blink 1.1s steps(1,end) infinite}@keyframes blink{50%{opacity:0}}
 ${css.join('\n')}
-@media (prefers-reduced-motion:reduce){.an,.cur,.blink{animation:none}.rm{opacity:0}}
 </style>
 <rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="10" fill="${C.bg}" stroke="${C.border}"/>
 <path d="M0.5 ${BAR}V10.5a10 10 0 0 1 10-10h${w - 21}a10 10 0 0 1 10 10V${BAR}z" fill="${C.bar}"/>
